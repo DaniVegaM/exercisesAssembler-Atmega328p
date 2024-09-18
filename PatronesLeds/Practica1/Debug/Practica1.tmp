@@ -1,0 +1,53 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\Debug\Practica1.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Practica1.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Practica1.map</FILE>
+  <FILE>Practica1.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <main><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>23</LINE></main>
+  <delay125m><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>83</LINE></delay125m>
+  <jumpToKitNormal><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>45</LINE></jumpToKitNormal>
+  <jumpToKitDoble><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>48</LINE></jumpToKitDoble>
+  <jumpToKitFueraDentro><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>51</LINE></jumpToKitFueraDentro>
+  <jumpToKitDentroFuera><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>54</LINE></jumpToKitDentroFuera>
+  <kitNormal><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>61</LINE></kitNormal>
+  <kitDoble><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>134</LINE></kitDoble>
+  <kitFueraDentro><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>161</LINE></kitFueraDentro>
+  <kitDentroFuera><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>175</LINE></kitDentroFuera>
+  <retMenu1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>57</LINE></retMenu1>
+  <izq><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>66</LINE></izq>
+  <der><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>74</LINE></der>
+  <lazo3><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>86</LINE></lazo3>
+  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>89</LINE></lazo2>
+  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>92</LINE></lazo1>
+  <delay2s><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>109</LINE></delay2s>
+  <lazo3_1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>112</LINE></lazo3_1>
+  <lazo2_1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>115</LINE></lazo2_1>
+  <lazo1_1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>118</LINE></lazo1_1>
+  <izqDoble><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>139</LINE></izqDoble>
+  <derDoble><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>148</LINE></derDoble>
+  <retMenu2><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>157</LINE></retMenu2>
+  <data_fueraDentro><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>173</LINE></data_fueraDentro>
+  <loop1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>165</LINE></loop1>
+  <data_dentroFuera><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>187</LINE></data_dentroFuera>
+  <loop2><FILE>C:\Users\Daniel Vegaam\Desktop\Practica1\Practica1\main.asm</FILE><LINE>179</LINE></loop2>
+ </LABELS>
+</ASSEMBLER_INFO>
