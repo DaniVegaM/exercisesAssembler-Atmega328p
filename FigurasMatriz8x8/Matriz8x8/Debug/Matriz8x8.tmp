@@ -24,13 +24,15 @@
  <LABELS>
   <main><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>27</LINE></main>
   <figura2><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>37</LINE></figura2>
-  <figura1_data><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>70</LINE></figura1_data>
-  <encenderMatriz><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>42</LINE></encenderMatriz>
-  <figura2_data><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>71</LINE></figura2_data>
-  <encenderFil><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>60</LINE></encenderFil>
-  <delay125m><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>73</LINE></delay125m>
-  <lazo3><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>76</LINE></lazo3>
-  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>79</LINE></lazo2>
-  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>82</LINE></lazo1>
+  <figura1_data><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>87</LINE></figura1_data>
+  <filasC><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>42</LINE></filasC>
+  <figura2_data><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>88</LINE></figura2_data>
+  <encenderCol><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>79</LINE></encenderCol>
+  <filasB_prep><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>60</LINE></filasB_prep>
+  <filasB><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>62</LINE></filasB>
+  <delay125m><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>90</LINE></delay125m>
+  <lazo3><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>93</LINE></lazo3>
+  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>96</LINE></lazo2>
+  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm</FILE><LINE>99</LINE></lazo1>
  </LABELS>
 </ASSEMBLER_INFO>
