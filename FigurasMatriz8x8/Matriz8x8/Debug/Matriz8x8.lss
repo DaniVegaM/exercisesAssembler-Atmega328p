@@ -1,5 +1,9 @@
 
+<<<<<<< Updated upstream
 AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8x8\main.asm Wed Sep 18 21:09:41 2024
+=======
+AVRASM ver. 2.2.8  C:\Users\abrah\OneDrive - Instituto Politecnico Nacional\01-Escuela\0_0_Sistemas en chip\Practicas\PracticasGIT\exercisesAssembler-Atmega328p\FigurasMatriz8x8\Matriz8x8\main.asm Wed Sep 18 14:31:29 2024
+>>>>>>> Stashed changes
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
@@ -991,6 +995,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8
                                  	.def cont1=r17
                                  	.def cont2=r18
                                  	.def cont3=r19
+<<<<<<< Updated upstream
                                  	.def temp2=r20
                                  	.def tempx=r21
                                  	.def tempy=r22
@@ -1005,6 +1010,19 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8
                                  
                                  	;Habilitamos salidas faltantes
 000004 e00f                      	ldi temp, $0F
+=======
+                                 	.cseg
+                                 	.org $0
+                                 
+000000 e70f                      	ldi temp, $7F
+000001 b907                      	out ddrc, temp ;Configuramos solo C7 como entrada, los demas son salidas
+                                 
+000002 e800                      	ldi temp, $80
+000003 b908                      	out portc, temp ;Habilitamos resistencias de pull-up en c7
+                                 
+                                 	;Habilitamos salidas faltantes
+000004 ef0f                      	ldi temp, $FF
+>>>>>>> Stashed changes
 000005 b904                      	out ddrb, temp
                                  
 000006 ef0f                      	ldi temp, $FF
@@ -1012,6 +1030,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8
                                  
                                  main:
 000008 b106                      	in temp, pinc
+<<<<<<< Updated upstream
 000009 7200                      	andi temp, $20 ;Si se presiona c5 muestra una figura diferente
 00000a f029                      	breq figura2
                                  
@@ -1105,6 +1124,102 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Chips\FigurasMatriz8x8\Matriz8
 00004b f789                      	brne lazo2
 00004c 953a                      	dec cont3
 00004d f771                      	brne lazo3
+=======
+000009 7800                      	andi temp, $80 ;Si se presiona c7 muestra una figura diferente
+00000a f1e9                      	breq figura2
+                                 
+                                 	;Sino que se mantenga mostrando una figura
+00000b e8e8                      	ldi zl,low(figura1_data*2)
+00000c e0f0                      	ldi zh, high(figura1_data*2)
+                                 
+00000d e008                      	ldi temp, $08
+00000e b905                      	out portb, temp ;Enciendo fila 1 (b3)
+00000f 940e 003f                 	call encenderCol
+000011 e000                      	ldi temp, $00
+000012 b905                      	out portb, temp ;Apago fila
+                                 
+000013 e004                      	ldi temp, $04
+000014 b905                      	out portb, temp ;Enciendo fila 1 (b2)
+000015 940e 003f                 	call encenderCol
+000017 e000                      	ldi temp, $00
+000018 b905                      	out portb, temp ;Apago fila
+                                 
+000019 e002                      	ldi temp, $02
+00001a b905                      	out portb, temp ;Enciendo fila 1 (b1)
+00001b 940e 003f                 	call encenderCol
+00001d e000                      	ldi temp, $00
+00001e b905                      	out portb, temp ;Apago fila
+                                 
+00001f e001                      	ldi temp, $01
+000020 b905                      	out portb, temp ;Enciendo fila 1 (b0)
+000021 940e 003f                 	call encenderCol
+000023 e000                      	ldi temp, $00
+000024 b905                      	out portb, temp ;Apago fila
+                                 
+000025 e008                      	ldi temp, $08
+000026 b908                      	out portc, temp ;Enciendo fila 1 (c3)
+000027 940e 003f                 	call encenderCol
+000029 e000                      	ldi temp, $00
+00002a b908                      	out portc, temp ;Apago fila
+                                 
+00002b e004                      	ldi temp, $04
+00002c b908                      	out portc, temp ;Enciendo fila 1 (c2)
+00002d 940e 003f                 	call encenderCol
+00002f e000                      	ldi temp, $00
+000030 b908                      	out portc, temp ;Apago fila
+                                 
+000031 e002                      	ldi temp, $02
+000032 b908                      	out portc, temp ;Enciendo fila 1 (c1)
+000033 940e 003f                 	call encenderCol
+000035 e000                      	ldi temp, $00
+000036 b908                      	out portc, temp ;Apago fila
+                                 
+000037 e001                      	ldi temp, $01
+000038 b908                      	out portc, temp ;Enciendo fila 1 (c0)
+000039 940e 003f                 	call encenderCol
+00003b e000                      	ldi temp, $00
+00003c b908                      	out portc, temp ;Apago fila
+                                 
+00003d 940c 0008                 	jmp main ;Vuelvo a leer entrada
+                                 
+                                 encenderCol:
+00003f 9105                      	lpm temp, z+
+000040 b90b                      	out portd, temp
+000041 940e 0049                 	call delay125m
+000043 9508                      	ret
+                                 
+000044 413e
+000045 8492
+000046 8688
+000047 3e81                      figura1_data: .db $3E, $41, $92, $84, $88, $86, $81, $3E
+                                 
+                                 figura2:
+000048 9508                      	ret
+                                 
+                                 delay125m:
+000049 e634                      	ldi cont3, 100
+                                 
+                                 lazo3:
+00004a e624                      	ldi cont2, 100
+                                 
+                                 lazo2:
+00004b ea10                      	ldi cont1, 160
+                                 
+                                 lazo1:
+00004c 0000                      	nop
+00004d 0000                      	nop
+00004e 0000                      	nop
+00004f 0000                      	nop
+000050 0000                      	nop
+000051 0000                      	nop
+000052 0000                      	nop
+000053 951a                      	dec cont1
+000054 f7b9                      	brne lazo1
+000055 952a                      	dec cont2
+000056 f7a1                      	brne lazo2
+000057 953a                      	dec cont3
+000058 f789                      	brne lazo3
+>>>>>>> Stashed changes
 
 
 RESOURCE USE INFORMATION
@@ -1124,14 +1239,22 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   1 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
+<<<<<<< Updated upstream
 r13:   0 r14:   0 r15:   0 r16:  31 r17:   2 r18:   2 r19:   2 r20:   4 
 r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   2 r31:   2 
 Registers used: 8 out of 35 (22.9%)
+=======
+r13:   0 r14:   0 r15:   0 r16:  44 r17:   2 r18:   2 r19:   2 r20:   0 
+r21:   0 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r29:   0 r30:   1 r31:   1 
+Registers used: 7 out of 35 (20.0%)
+>>>>>>> Stashed changes
 
 "ATmega328P" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   0 adiw  :   0 and   :   0 
 andi  :   1 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+<<<<<<< Updated upstream
 brcc  :   0 brcs  :   0 break :   0 breq  :   3 brge  :   0 brhc  :   0 
 brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
 brne  :   3 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
@@ -1144,17 +1267,39 @@ ld    :   0 ldd   :   0 ldi   :  16 lds   :   0 lpm   :   1 lsl   :   2
 lsr   :   0 mov   :   4 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :  10 or    :   0 ori   :   0 out   :   9 pop   :   0 
 push  :   0 rcall :   0 ret   :   2 reti  :   0 rjmp  :   0 rol   :   0 
+=======
+brcc  :   0 brcs  :   0 break :   0 breq  :   1 brge  :   0 brhc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
+brne  :   3 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+brvs  :   0 bset  :   0 bst   :   0 call  :   9 cbi   :   0 cbr   :   0 
+clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
+clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
+cpi   :   0 cpse  :   0 dec   :   3 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   1 inc   :   0 jmp   :   1 
+ld    :   0 ldd   :   0 ldi   :  25 lds   :   0 lpm   :   1 lsl   :   0 
+lsr   :   0 mov   :   0 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
+neg   :   0 nop   :   7 or    :   0 ori   :   0 out   :  21 pop   :   0 
+push  :   0 rcall :   0 ret   :   3 reti  :   0 rjmp  :   0 rol   :   0 
+>>>>>>> Stashed changes
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
 sub   :   0 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
+<<<<<<< Updated upstream
 Instructions used: 16 out of 113 (14.2%)
+=======
+Instructions used: 12 out of 113 (10.6%)
+>>>>>>> Stashed changes
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
+<<<<<<< Updated upstream
 [.cseg] 0x000000 0x00009e    142     16    158   32768   0.5%
+=======
+[.cseg] 0x000000 0x0000b4    172      8    180   32768   0.5%
+>>>>>>> Stashed changes
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
