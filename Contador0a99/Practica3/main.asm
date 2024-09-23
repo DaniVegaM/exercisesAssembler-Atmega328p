@@ -32,17 +32,9 @@ reset:
 	ldi ZH, high(display7s*2)
 	ldi XL, $00
 	ldi XH, $01
-
-	ldi temp, $0A
-
-lazo: 
-	lpm temp2, z+ ;Carga en memoria de programa cada valor para el display
-	st x+, temp2 ;Almacena los valores en memoria de datos
-	dec temp
-	brne lazo
-	
+		
 	ldi temp, $03
-	out tccr0b, temp ;seleccionamos modo normal y N = 64
+	out tccr0b, temp ;seleccionamos modo normal y prescaler = 64
 	
 	ldi temp, $01
 	sts timsk0, temp ;habilitamos interrupcion por sobreflujo
@@ -51,9 +43,17 @@ lazo:
 	ldi decena, $00
 	ldi mux, $01 ;PARA ANODO COMUN
 	ldi flag, $00
-	ldi cont3, 30
-	
-	sei ;habilita interrupcion global
+
+	sei
+
+	ldi temp, $0A
+lazo: 
+	lpm temp2, z+ ;Carga en memoria de programa cada valor para el display
+	st x+, temp2 ;Almacena los valores en memoria de datos
+	dec temp
+	brne lazo
+
+	;sei ;habilita interrupcion global
 
 main: 
 	cpi flag, $00 
@@ -67,17 +67,26 @@ main:
 	cpi temp, $01 
 	breq com_flag ;PORTB == $01, invierte flag
 
+	sei
+
 	jmp main
 
 com_flag: 
-	call delay_30ms
+	;call delay_30ms
 	com flag
 	jmp main
 
+espera: ;Espera a que B sea igual a uno, es decir, que se solto el boton
+	in temp, PINB ;Leemos el boton
+	cpi temp, $03 ;Verificamos si ambos botones estan presionados
+	breq espera 
+	ret
+	;call delay_30ms
+
 incrementar: 
-	call delay_30ms
+	;call delay_30ms
 	inc unidad
-	jmp espera
+	call espera
 	cpi unidad, $0A
 	brne main
 	call reset_unidad
@@ -92,9 +101,9 @@ reset_unidad:
 	jmp main
 	
 decrementar: 
-	call delay_30ms
+	;call delay_30ms
 	dec unidad
-	jmp espera
+	call espera
 	cpi unidad, $FF
 	brne main
 	call reset_unidad_0
@@ -106,13 +115,6 @@ reset_unidad_0:
 	cpi decena, $FF
 	brne main
 	ldi decena, $09
-	jmp main
-
-espera: ;Espera a que B sea igual a uno, es decir, que se solto el boton
-	in temp, PINB ;Leemos el boton
-	cpi temp, $03 ;Verificamos si ambos botones estan presionados
-	breq espera 
-	call delay_30ms
 	jmp main
 
 delay_30ms: 
@@ -165,12 +167,10 @@ lazo1_1:
 	brne lazo3_1
 	ret
 
+
 timer0_ovf:	
 	ldi temp, $00
 	out PORTC, temp ;Apaga displays
-	
-	;ldi temp, $0A 
-	ldi r27, $01 ;Pone XH en $01 
 
 	cpi mux, $01
 	brne mux_decena ;Caso para decena
@@ -180,10 +180,8 @@ timer0_ovf:
 	ld temp, x
 	out PORTD, temp
 	out PORTC, mux
-	call delay_1ms
+	;call delay_1ms
 	ldi mux, $02
-	;dec cont3
-	;breq mux_decena
 	reti
 
 mux_decena: 
@@ -191,9 +189,8 @@ mux_decena:
 	ld temp, x
 	out PORTD, temp
 	out PORTC, mux
-	call delay_1ms
+	;call delay_1ms
 	ldi mux, $01
-	;ldi cont3, 30
 	reti
 
 display7s:
