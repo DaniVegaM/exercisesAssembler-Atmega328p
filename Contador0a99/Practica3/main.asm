@@ -12,8 +12,7 @@
 	.cseg
 
 	.org 0
-	jmp reset ; vamos a reset
-
+	jmp reset 
 	.org $020
 	jmp timer0_ovf
 
@@ -45,85 +44,88 @@ reset:
 	ldi flag, $00
 
 	sei
-
 	ldi temp, $0A
+
 lazo: 
 	lpm temp2, z+ ;Carga en memoria de programa cada valor para el display
 	st x+, temp2 ;Almacena los valores en memoria de datos
 	dec temp
 	brne lazo
 
-	;sei ;habilita interrupcion global
-
 main: 
-	cpi flag, $00 
-	brne decrementar
-
-	in temp, PINB ;Leemos botones
-	cpi temp, $02 
-	breq incrementar ;PORTB == $02, incrementa
-
 	in temp, PINB ;Leemos botones
 	cpi temp, $01 
 	breq com_flag ;PORTB == $01, invierte flag
 
-	sei
+	in temp, PINB ;Leemos botones
+	cpi temp, $02 
+	breq suma_resta ;PORTB == $02, cambia valores
+	
+	rjmp main
 
-	jmp main
+suma_resta:
+	cpi flag, $00 
+	brne decrementar
+	breq incrementar
 
 com_flag: 
-	;call delay_30ms
+	call delay_30ms
 	com flag
+	call espera
 	jmp main
 
 espera: ;Espera a que B sea igual a uno, es decir, que se solto el boton
 	in temp, PINB ;Leemos el boton
-	cpi temp, $03 ;Verificamos si ambos botones estan presionados
+	cpi temp, $01 ;Verificamos si botones estan presionados
 	breq espera 
-	ret
-	;call delay_30ms
+
+	in temp, PINB ;Leemos el boton
+	cpi temp, $02 ;Verificamos si botones estan presionados
+	breq espera 
+
+	in temp, PINB ;Leemos el boton
+	andi temp, $03 ;Verificamos si botones estan presionados
+	breq espera 
+	
+	call delay_30ms
+	jmp main
+	;ret
 
 incrementar: 
-	;call delay_30ms
+	call delay_30ms
 	inc unidad
-	call espera
 	cpi unidad, $0A
-	brne main
-	call reset_unidad
-	jmp main
+	breq reset_unidad
+	jmp espera
 
 reset_unidad: 
 	ldi unidad, $00
 	inc decena
 	cpi decena, $0A
-	brne main
+	brne espera
 	ldi decena, $00
-	jmp main
+	jmp espera
 	
 decrementar: 
-	;call delay_30ms
+	call delay_30ms
 	dec unidad
-	call espera
 	cpi unidad, $FF
-	brne main
-	call reset_unidad_0
-	jmp main
+	breq reset_unidad_0
+	jmp espera
 
 reset_unidad_0:
 	ldi unidad, $09
 	dec decena
 	cpi decena, $FF
-	brne main
+	brne espera
 	ldi decena, $09
-	jmp main
+	jmp espera
 
 delay_30ms: 
 	ldi cont1, 200
-
-lazo2: 
+lazo2_30ms: 
 	ldi cont2, 250
-
-lazo1: 
+lazo1_30ms: 
 	nop
 	nop
 	nop
@@ -134,21 +136,18 @@ lazo1:
 	nop
 	nop
 	dec cont2
-	brne lazo1
+	brne lazo1_30ms
 	dec cont1
-	brne lazo2
+	brne lazo2_30ms
 	ret
 
 delay_1ms: 
 	ldi cont3, 10
-
-lazo3_1:
+lazo3_1ms:
 	ldi cont2, 10
-
-lazo2_1:
+lazo2_1ms:
 	ldi cont1, 16
-
-lazo1_1:
+lazo1_1ms:
 	nop
 	nop
 	nop
@@ -160,13 +159,12 @@ lazo1_1:
 	nop
 	nop
 	dec cont1
-	brne lazo1_1
+	brne lazo1_1ms
 	dec cont2
-	brne lazo2_1
+	brne lazo2_1ms
 	dec cont3
-	brne lazo3_1
+	brne lazo3_1ms
 	ret
-
 
 timer0_ovf:	
 	ldi temp, $00
@@ -180,7 +178,7 @@ timer0_ovf:
 	ld temp, x
 	out PORTD, temp
 	out PORTC, mux
-	;call delay_1ms
+	call delay_1ms
 	ldi mux, $02
 	reti
 
@@ -189,7 +187,7 @@ mux_decena:
 	ld temp, x
 	out PORTD, temp
 	out PORTC, mux
-	;call delay_1ms
+	call delay_1ms
 	ldi mux, $01
 	reti
 
