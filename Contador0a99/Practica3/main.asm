@@ -13,6 +13,7 @@
 
 	.org 0
 	jmp reset 
+
 	.org $020
 	jmp timer0_ovf
 
@@ -52,16 +53,29 @@ lazo:
 	dec temp
 	brne lazo
 
-main: 
+main:	
+	jmp main
+
+timer0_ovf:	
 	in temp, PINB ;Leemos botones
-	cpi temp, $01 
+	andi temp, $01 
 	breq com_flag ;PORTB == $01, invierte flag
 
 	in temp, PINB ;Leemos botones
-	cpi temp, $02 
+	andi temp, $02
 	breq suma_resta ;PORTB == $02, cambia valores
-	
-	rjmp main
+
+	in temp, PINB ;Leemos botones
+	andi temp, $03
+	brne timer0_ovf ;PORTB == $02, cambia valores
+
+prueba:
+	ldi temp, $05
+	out portd, temp
+	ldi temp, $03
+	out portc, temp
+	call delay_30ms
+	ret
 
 suma_resta:
 	cpi flag, $00 
@@ -72,15 +86,16 @@ com_flag:
 	call delay_30ms
 	com flag
 	call espera
-	jmp main
+	jmp timer0_ovf
 
 espera: ;Espera a que B sea igual a uno, es decir, que se solto el boton
+	jmp muxeo
 	in temp, PINB ;Leemos el boton
-	cpi temp, $01 ;Verificamos si botones estan presionados
+	andi temp, $01 ;Verificamos si botones estan presionados
 	breq espera 
 
-	in temp, PINB ;Leemos el boton
-	cpi temp, $02 ;Verificamos si botones estan presionados
+	in temp, PINB ;Leemos el boton	
+	andi temp, $02 ;Verificamos si botones estan presionados
 	breq espera 
 
 	in temp, PINB ;Leemos el boton
@@ -88,8 +103,8 @@ espera: ;Espera a que B sea igual a uno, es decir, que se solto el boton
 	breq espera 
 	
 	call delay_30ms
-	jmp main
-	;ret
+	
+	jmp timer0_ovf
 
 incrementar: 
 	call delay_30ms
@@ -109,16 +124,16 @@ reset_unidad:
 decrementar: 
 	call delay_30ms
 	dec unidad
-	cpi unidad, $FF
+	cpi unidad, $00
 	breq reset_unidad_0
 	jmp espera
 
 reset_unidad_0:
-	ldi unidad, $09
+	ldi unidad, $0A
 	dec decena
-	cpi decena, $FF
+	cpi decena, $00
 	brne espera
-	ldi decena, $09
+	ldi decena, $0A
 	jmp espera
 
 delay_30ms: 
@@ -166,9 +181,10 @@ lazo1_1ms:
 	brne lazo3_1ms
 	ret
 
-timer0_ovf:	
+muxeo:
 	ldi temp, $00
 	out PORTC, temp ;Apaga displays
+	call delay_1ms
 
 	cpi mux, $01
 	brne mux_decena ;Caso para decena
@@ -192,4 +208,5 @@ mux_decena:
 	reti
 
 display7s:
-	.db $03, $9F, $25, $0D, $99, $49, $41, $1F, $01, $09 ;Valores para display7s anodo comun
+	;.db $03, $9F, $25, $0D, $99, $49, $41, $1F, $01, $09 ;Valores para display7s anodo comun
+	.db $03, $9F, $25, $03, $9F, $25, $03, $9F, $25, $03 ;Valores para display7s anodo comun
