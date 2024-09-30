@@ -9,6 +9,7 @@
 	.def flag = r22
 	.def temp2 = r23
 	.def cont3 = r24
+	.def temp3 = r25
 	.cseg
 
 	.org 0
@@ -24,8 +25,11 @@ reset:
 	ldi temp, $03
 	out DDRC, temp; Configuramos C0 y C1 como salidas
 
-	ldi temp, $03 
-	out PORTB, temp ;Configuramos B0 y B1 como entrada habilitando PULL-UP
+	ldi temp, $00
+	out DDRB, temp ;Configuramos PORTB como entrada 
+
+	ldi temp, $03
+	out PORTB, temp ;Configuramos B0 y B1 habilitando PULL-UP
 
 	;Inicializamos registros extendidos
 	ldi ZL, low(display7s*2)
@@ -54,60 +58,50 @@ lazo:
 	brne lazo
 
 main:	
-	jmp main
-
-timer0_ovf:	
-	in temp, PINB ;Leemos botones
-	andi temp, $01 
-	breq com_flag ;PORTB == $01, invierte flag
-
-	in temp, PINB ;Leemos botones
-	andi temp, $02
-	breq suma_resta ;PORTB == $02, cambia valores
-
 	in temp, PINB ;Leemos botones
 	andi temp, $03
-	brne timer0_ovf ;PORTB == $02, cambia valores
+	cpi temp, $03
+	breq main
 
-prueba:
-	ldi temp, $05
-	out portd, temp
-	ldi temp, $03
-	out portc, temp
-	call delay_30ms
-	ret
+	in temp2, PINB ;Leemos botones
+	andi temp2, $03
+	cpi temp2, $01
+	breq com_flag ;PORTB == $01, invierte flag
+
+	in temp3, PINB ;Leemos botones 
+	andi temp3, $03
+	cpi temp3, $02		   
+	breq suma_resta ;PORTB == $02, cambia valores
+
+	jmp main
 
 suma_resta:
-	cpi flag, $00 
-	brne decrementar
-	breq incrementar
+	call delay_30ms
+	cpi flag, $FF 
+	breq decrementar
+	jmp incrementar
 
-com_flag: 
+com_flag:
 	call delay_30ms
 	com flag
-	call espera
-	jmp timer0_ovf
 
-espera: ;Espera a que B sea igual a uno, es decir, que se solto el boton
-	jmp muxeo
-	in temp, PINB ;Leemos el boton
-	andi temp, $01 ;Verificamos si botones estan presionados
-	breq espera 
+espera: 
+	call delay_30ms
+	in temp2, PINB ;Leemos botones
+	andi temp2, $03
+	cpi temp2, $01
+	breq espera
+	call delay_30ms
 
-	in temp, PINB ;Leemos el boton	
-	andi temp, $02 ;Verificamos si botones estan presionados
-	breq espera 
-
-	in temp, PINB ;Leemos el boton
-	andi temp, $03 ;Verificamos si botones estan presionados
-	breq espera 
-	
+	in temp3, PINB ;Leemos botones 
+	andi temp3, $03
+	cpi temp3, $02
+	breq espera
 	call delay_30ms
 	
-	jmp timer0_ovf
+	jmp main
 
 incrementar: 
-	call delay_30ms
 	inc unidad
 	cpi unidad, $0A
 	breq reset_unidad
@@ -122,24 +116,23 @@ reset_unidad:
 	jmp espera
 	
 decrementar: 
-	call delay_30ms
 	dec unidad
-	cpi unidad, $00
+	cpi unidad, $FF
 	breq reset_unidad_0
 	jmp espera
 
 reset_unidad_0:
-	ldi unidad, $0A
+	ldi unidad, $09
 	dec decena
-	cpi decena, $00
+	cpi decena, $FF
 	brne espera
-	ldi decena, $0A
+	ldi decena, $09
 	jmp espera
 
 delay_30ms: 
-	ldi cont1, 200
+	ldi cont1, 250
 lazo2_30ms: 
-	ldi cont2, 250
+	ldi cont2, 200
 lazo1_30ms: 
 	nop
 	nop
@@ -156,57 +149,28 @@ lazo1_30ms:
 	brne lazo2_30ms
 	ret
 
-delay_1ms: 
-	ldi cont3, 10
-lazo3_1ms:
-	ldi cont2, 10
-lazo2_1ms:
-	ldi cont1, 16
-lazo1_1ms:
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	nop
-	dec cont1
-	brne lazo1_1ms
-	dec cont2
-	brne lazo2_1ms
-	dec cont3
-	brne lazo3_1ms
-	ret
-
-muxeo:
-	ldi temp, $00
-	out PORTC, temp ;Apaga displays
-	call delay_1ms
+timer0_ovf:
+	ldi temp3, $00
+	out PORTC, temp3 ;Apaga displays
 
 	cpi mux, $01
 	brne mux_decena ;Caso para decena
 
 	; Caso para unidad (mux_undidad)
 	mov r26, unidad
-	ld temp, x
-	out PORTD, temp
+	ld temp3, x
+	out PORTD, temp3
 	out PORTC, mux
-	call delay_1ms
 	ldi mux, $02
 	reti
 
 mux_decena: 
 	mov r26, decena
-	ld temp, x
-	out PORTD, temp
+	ld temp3, x
+	out PORTD, temp3
 	out PORTC, mux
-	call delay_1ms
 	ldi mux, $01
 	reti
 
 display7s:
-	;.db $03, $9F, $25, $0D, $99, $49, $41, $1F, $01, $09 ;Valores para display7s anodo comun
-	.db $03, $9F, $25, $03, $9F, $25, $03, $9F, $25, $03 ;Valores para display7s anodo comun
+	.db $03, $9F, $25, $0D, $99, $49, $41, $1F, $01, $09 ;Valores para display7s anodo comun
