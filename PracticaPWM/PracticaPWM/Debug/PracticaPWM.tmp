@@ -23,9 +23,11 @@
  </OUTPUT_FILES>
  <LABELS>
   <main><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>28</LINE></main>
-  <delay_100m><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>42</LINE></delay_100m>
-  <lazo3><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>44</LINE></lazo3>
-  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>45</LINE></lazo2>
-  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>46</LINE></lazo1>
+  <bajarBrillo><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>43</LINE></bajarBrillo>
+  <delay_100m><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>52</LINE></delay_100m>
+  <aumentarBrillo><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>35</LINE></aumentarBrillo>
+  <lazo3><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>54</LINE></lazo3>
+  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>55</LINE></lazo2>
+  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm</FILE><LINE>56</LINE></lazo1>
  </LABELS>
 </ASSEMBLER_INFO>

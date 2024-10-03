@@ -8,11 +8,11 @@
 	.cseg
 	.org $0
 
-	ldi temp, $01
-	out portc, temp ; Habilitamos pull up
+	ldi temp, $03
+	out portc, temp ; Habilitamos pull up (c0 y c1)
 
 	ldi temp, $40
-	out ddrd,temp ;Habilitamos salida
+	out ddrd,temp ;Habilitamos salida (d6)
 
 	ldi temp, $83
 	out tccr0a, temp
@@ -23,17 +23,27 @@
 	ldi temp, 127
 	out ocr0a, temp //Registro de comparacion
 
-	ldi cte, 5
+	ldi cte, 5 //Incrementos de 5
 
 main:
-	;NOTA: Para leer unicamente 1 bit de un puerto usamos sbic
-	sbic pinc, 0
-	jmp main
+	;Leemos boton
+	in temp, pinc
+	andi temp, $03
+	brne bajarBrillo
 
 	call delay_100m
+aumentarBrillo:
 	in temp,ocr0a
 
-	add temp, cte
+	add temp, cte ;Aumentamos
+	out ocr0a, temp
+
+	jmp main
+
+bajarBrillo:
+	in temp,ocr0a
+
+	sub temp, cte ;Decrementamos
 	out ocr0a, temp
 
 	jmp main
@@ -44,6 +54,9 @@ delay_100m:
 lazo3: ldi cont2, 200
 lazo2: ldi cont1, 200
 lazo1:
+	nop
+	nop
+	nop
 	nop
 	nop
 	nop

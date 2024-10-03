@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm Wed Oct 02 18:42:59 2024
+AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\PracticaPWM\PracticaPWM\main.asm Thu Oct 03 16:38:14 2024
 
 
 EQU  SIGNATURE_000 0000001e
@@ -701,7 +701,9 @@ DEF  cont3        r18
 DEF  cont2        r19
 DEF  cont1        r20
 CSEG main         0000000b
-CSEG delay_100m   00000015
-CSEG lazo3        00000016
-CSEG lazo2        00000017
-CSEG lazo1        00000018
+CSEG bajarBrillo  00000015
+CSEG delay_100m   0000001a
+CSEG aumentarBrillo 00000010
+CSEG lazo3        0000001b
+CSEG lazo2        0000001c
+CSEG lazo1        0000001d
