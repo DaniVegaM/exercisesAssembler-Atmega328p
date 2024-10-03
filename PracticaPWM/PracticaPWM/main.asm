@@ -5,6 +5,7 @@
 	.def cont3=r18
 	.def cont2=r19
 	.def cont1=r20
+	.def temp2=r21
 	.cseg
 	.org $0
 
@@ -27,23 +28,33 @@
 
 main:
 	;Leemos boton
-	in temp, pinc
-	andi temp, $03
-	brne bajarBrillo
+	in temp2, pinc
+	mov temp, temp2
+	andi temp, $00
+	breq main
 
+	mov temp, temp2
+	andi temp, $03
+	breq main
+
+	mov temp, temp2
+	andi temp, $01
+	brne aumentarBrillo
+
+bajarBrillo:
 	call delay_100m
-aumentarBrillo:
 	in temp,ocr0a
 
-	add temp, cte ;Aumentamos
+	sub temp, cte ;Decrementamos
 	out ocr0a, temp
 
 	jmp main
 
-bajarBrillo:
+aumentarBrillo:
+	call delay_100m
 	in temp,ocr0a
 
-	sub temp, cte ;Decrementamos
+	add temp, cte ;Aumentamos
 	out ocr0a, temp
 
 	jmp main
