@@ -1,0 +1,45 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\Debug\Practica 3.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>Practica 3.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>Practica 3.map</FILE>
+  <FILE>Practica 3.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <reset><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>20</LINE></reset>
+  <timer0_ovf><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>171</LINE></timer0_ovf>
+  <display7s><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>196</LINE></display7s>
+  <lazo><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>50</LINE></lazo>
+  <main><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>58</LINE></main>
+  <decrementar><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>103</LINE></decrementar>
+  <incrementar><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>86</LINE></incrementar>
+  <com_flag><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>74</LINE></com_flag>
+  <espera><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>79</LINE></espera>
+  <reset_unidad><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>95</LINE></reset_unidad>
+  <reset_unidad_0><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>112</LINE></reset_unidad_0>
+  <delay_30ms><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>120</LINE></delay_30ms>
+  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>123</LINE></lazo2>
+  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>126</LINE></lazo1>
+  <delay_1ms><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>142</LINE></delay_1ms>
+  <lazo3_1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>145</LINE></lazo3_1>
+  <lazo2_1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>148</LINE></lazo2_1>
+  <lazo1_1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>151</LINE></lazo1_1>
+  <mux_decena><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 3\Practica 3\main.asm</FILE><LINE>187</LINE></mux_decena>
+ </LABELS>
+</ASSEMBLER_INFO>
