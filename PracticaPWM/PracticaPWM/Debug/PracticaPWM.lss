@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Chips\PracticaPWM\PracticaPWM\main.asm Thu Oct 03 16:48:34 2024
+AVRASM ver. 2.2.8  C:\Users\abrah\OneDrive - Instituto Politecnico Nacional\01-Escuela\0_0_Sistemas en chip\Practicas\PracticasGIT\exercisesAssembler-Atmega328p\PracticaPWM\PracticaPWM\main.asm Fri Oct 04 07:42:30 2024
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
@@ -992,6 +992,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Chips\PracticaPWM\PracticaPWM\
                                  	.def cont2=r19
                                  	.def cont1=r20
                                  	.def temp2=r21
+                                 	.def flag = r22
                                  	.cseg
                                  	.org $0
                                  
@@ -999,7 +1000,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Chips\PracticaPWM\PracticaPWM\
 000001 b908                      	out portc, temp ; Habilitamos pull up (c0 y c1)
                                  
 000002 e400                      	ldi temp, $40
-000003 b90a                      	out ddrd,temp ;Habilitamos salida (d6)
+000003 b90a                      	out ddrd,temp ;Habilitamos salida (d6) 
                                  
 000004 e803                      	ldi temp, $83
 000005 bd04                      	out tccr0a, temp
@@ -1015,58 +1016,70 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Chips\PracticaPWM\PracticaPWM\
                                  main:
                                  	;Leemos boton
 00000b b156                      	in temp2, pinc
-00000c 2f05                      	mov temp, temp2
-00000d 7000                      	andi temp, $00
-00000e f3e1                      	breq main
+00000c 7053                      	andi temp2, $03
                                  
-00000f 2f05                      	mov temp, temp2
-000010 7003                      	andi temp, $03
-000011 f3c9                      	breq main
+00000d 2f05                      	mov temp, temp2
+00000e 3000                      	cpi temp, $00
+00000f f3d9                      	breq main
                                  
-000012 2f05                      	mov temp, temp2
-000013 7001                      	andi temp, $01
-000014 f439                      	brne aumentarBrillo
+000010 2f05                      	mov temp, temp2
+000011 3002                      	cpi temp, $02
+000012 f029                      	breq bajarBrillo
+                                 
+000013 2f05                      	mov temp, temp2
+000014 3001                      	cpi temp, $01
+000015 f059                      	breq aumentarBrillo
+                                 
+000016 940c 000b                 	jmp main
                                  
                                  bajarBrillo:
-000015 940e 0023                 	call delay_100m
-000017 b507                      	in temp,ocr0a
+000018 940e 002a                 	call delay_100m
+00001a b507                      	in temp, ocr0a
                                  
-000018 1b01                      	sub temp, cte ;Decrementamos
-000019 bd07                      	out ocr0a, temp
+00001b 3005                      	cpi temp, 5
+00001c f374                      	brlt main
                                  
-00001a 940c 000b                 	jmp main
+00001d 1b01                      	sub temp, cte ;Decrementamos
+00001e bd07                      	out ocr0a, temp
+                                 
+00001f 940c 000b                 	jmp main
                                  
                                  aumentarBrillo:
-00001c 940e 0023                 	call delay_100m
-00001e b507                      	in temp,ocr0a
+000021 940e 002a                 	call delay_100m
+000023 b507                      	in temp, ocr0a
+                                 	
+000024 370f                      	cpi temp, 127
+000025 f72c                      	brge main
                                  
-00001f 0f01                      	add temp, cte ;Aumentamos
-000020 bd07                      	out ocr0a, temp
+000026 0f01                      	add temp, cte ;Aumentamos
+000027 bd07                      	out ocr0a, temp
                                  
-000021 940c 000b                 	jmp main
-                                 
+000028 940c 000b                 	jmp main
                                  
                                  delay_100m:
-000023 e024                      	ldi cont3,4
-000024 ec38                      lazo3: ldi cont2, 200
-000025 ec48                      lazo2: ldi cont1, 200
+00002a e024                      	ldi cont3, 4
+                                 lazo3: 
+00002b ec38                      	ldi cont2, 200
+                                 lazo2: 
+00002c ec48                      	ldi cont1, 200
                                  lazo1:
-000026 0000                      	nop
-000027 0000                      	nop
-000028 0000                      	nop
-000029 0000                      	nop
-00002a 0000                      	nop
-00002b 0000                      	nop
-00002c 0000                      	nop
 00002d 0000                      	nop
 00002e 0000                      	nop
 00002f 0000                      	nop
-000030 954a                      	dec cont1
-000031 f7a1                      	brne lazo1
-000032 953a                      	dec cont2
-000033 f789                      	brne lazo2
-000034 952a                      	dec cont3
-000035 f771                      	brne lazo3
+000030 0000                      	nop
+000031 0000                      	nop
+000032 0000                      	nop
+000033 0000                      	nop
+000034 0000                      	nop
+000035 0000                      	nop
+000036 0000                      	nop
+000037 954a                      	dec cont1
+000038 f7a1                      	brne lazo1
+000039 953a                      	dec cont2
+00003a f789                      	brne lazo2
+00003b 952a                      	dec cont3
+00003c f771                      	brne lazo3
+00003d 9508                      	ret
 
 
 RESOURCE USE INFORMATION
@@ -1086,37 +1099,37 @@ counted separately from r26..r31 here.
 "ATmega328P" register use summary:
 x  :   0 y  :   0 z  :   0 r0 :   0 r1 :   0 r2 :   0 r3 :   0 r4 :   0 
 r5 :   0 r6 :   0 r7 :   0 r8 :   0 r9 :   0 r10:   0 r11:   0 r12:   0 
-r13:   0 r14:   0 r15:   0 r16:  22 r17:   3 r18:   2 r19:   2 r20:   2 
-r21:   4 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
+r13:   0 r14:   0 r15:   0 r16:  24 r17:   3 r18:   2 r19:   2 r20:   2 
+r21:   5 r22:   0 r23:   0 r24:   0 r25:   0 r26:   0 r27:   0 r28:   0 
 r29:   0 r30:   0 r31:   0 
 Registers used: 6 out of 35 (17.1%)
 
 "ATmega328P" instruction use summary:
 .lds  :   0 .sts  :   0 adc   :   0 add   :   1 adiw  :   0 and   :   0 
-andi  :   3 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
-brcc  :   0 brcs  :   0 break :   0 breq  :   2 brge  :   0 brhc  :   0 
-brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   0 brmi  :   0 
-brne  :   4 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
+andi  :   1 asr   :   0 bclr  :   0 bld   :   0 brbc  :   0 brbs  :   0 
+brcc  :   0 brcs  :   0 break :   0 breq  :   3 brge  :   1 brhc  :   0 
+brhs  :   0 brid  :   0 brie  :   0 brlo  :   0 brlt  :   1 brmi  :   0 
+brne  :   3 brpl  :   0 brsh  :   0 brtc  :   0 brts  :   0 brvc  :   0 
 brvs  :   0 bset  :   0 bst   :   0 call  :   2 cbi   :   0 cbr   :   0 
 clc   :   0 clh   :   0 cli   :   0 cln   :   0 clr   :   0 cls   :   0 
 clt   :   0 clv   :   0 clz   :   0 com   :   0 cp    :   0 cpc   :   0 
-cpi   :   0 cpse  :   0 dec   :   3 eor   :   0 fmul  :   0 fmuls :   0 
-fmulsu:   0 icall :   0 ijmp  :   0 in    :   3 inc   :   0 jmp   :   2 
+cpi   :   5 cpse  :   0 dec   :   3 eor   :   0 fmul  :   0 fmuls :   0 
+fmulsu:   0 icall :   0 ijmp  :   0 in    :   3 inc   :   0 jmp   :   3 
 ld    :   0 ldd   :   0 ldi   :   9 lds   :   0 lpm   :   0 lsl   :   0 
 lsr   :   0 mov   :   3 movw  :   0 mul   :   0 muls  :   0 mulsu :   0 
 neg   :   0 nop   :  10 or    :   0 ori   :   0 out   :   7 pop   :   0 
-push  :   0 rcall :   0 ret   :   0 reti  :   0 rjmp  :   0 rol   :   0 
+push  :   0 rcall :   0 ret   :   1 reti  :   0 rjmp  :   0 rol   :   0 
 ror   :   0 sbc   :   0 sbci  :   0 sbi   :   0 sbic  :   0 sbis  :   0 
 sbiw  :   0 sbr   :   0 sbrc  :   0 sbrs  :   0 sec   :   0 seh   :   0 
 sei   :   0 sen   :   0 ser   :   0 ses   :   0 set   :   0 sev   :   0 
 sez   :   0 sleep :   0 spm   :   0 st    :   0 std   :   0 sts   :   0 
 sub   :   1 subi  :   0 swap  :   0 tst   :   0 wdr   :   0 
-Instructions used: 13 out of 113 (11.5%)
+Instructions used: 17 out of 113 (15.0%)
 
 "ATmega328P" memory use summary [bytes]:
 Segment   Begin    End      Code   Data   Used    Size   Use%
 ---------------------------------------------------------------
-[.cseg] 0x000000 0x00006c    108      0    108   32768   0.3%
+[.cseg] 0x000000 0x00007c    124      0    124   32768   0.4%
 [.dseg] 0x000100 0x000100      0      0      0    2048   0.0%
 [.eseg] 0x000000 0x000000      0      0      0    1024   0.0%
 
