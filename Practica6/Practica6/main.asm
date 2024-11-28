@@ -105,7 +105,7 @@ lazo:
 	dec temp
 	brne lazo
 
-	;C3 será la entrada (potenciometro)
+	;C3 sera la entrada (potenciometro)
 	ldi temp, $63 ;Config referencia a VCC, ajusta a izquierda y potenciometro en c3
 	sts admux, temp
 
@@ -282,7 +282,7 @@ lazo:
 	dec temp
 	brne lazo
 
-	;C3 será la entrada (potenciometro)
+	;C3 serï¿½ la entrada (potenciometro)
 	ldi temp, $E3 ;Config referencia a VCC, ajusta a izquierda y potenciometro en c3
 	sts admux, temp
 

@@ -30,7 +30,7 @@
 
 
 reset:
-	// CONFIGURACION DE PUERTOS
+	; CONFIGURACION DE PUERTOS
 	ldi temp, $FB ;1111 1011
 	out DDRD, temp ;Configuramos puerto D como salida, menos D2 
 
@@ -47,26 +47,26 @@ reset:
 	out DDRC, temp; Configuramos C0, C1, C2 como salidas		
 
 	
-	// CONFIGURACION DE TIMERS E INTERRUPCIONES
-	// TIMER0_OVF
+	; CONFIGURACION DE TIMERS E INTERRUPCIONES
+	; TIMER0_OVF
 	ldi temp, $03
 	out tccr0b, temp ;seleccionamos modo normal y prescaler = 64
 	
 	ldi temp, $01
 	sts timsk0, temp ;habilitamos interrupcion por sobreflujo
 
-	// INT0 POR FLANCOS DE SUBIDA
+	; INT0 POR FLANCOS DE SUBIDA
 	ldi temp, $03
 	sts EICRA, temp ;Configuramos la deteccion de flancos de subida 
 
 	ldi temp, $01
 	out EIMSK, temp ;Habilitamos el INT0 (interrupcion externa 0)
 
-	// TIMER2_OVF		
+	; TIMER2_OVF		
 	ldi temp, $01 
 	sts TIMSK2, temp ;Configuramos timer2 por sobreflujo
 
-	//TIMER1_COMPA
+	;TIMER1_COMPA
 	ldi temp, $0C ;Prescaler de 256 y modo de comparacion
 	sts TCCR1B, temp 
 
@@ -80,7 +80,7 @@ reset:
 	sts TIMSK1, temp ;Habilitamos modo de comparacion 
 
 
-	// INICIALIZACION DE REGISTROS
+	; INICIALIZACION DE REGISTROS
 	ldi unidad, 0
 	ldi decena, 0
 	ldi centena, 0
@@ -89,7 +89,7 @@ reset:
 	ldi cen_aux, 0
 	ldi mux, $01 ;PARA ANODO COMUN
 
-	// CARGA EN MEM DE PROGRAMA
+	; CARGA EN MEM DE PROGRAMA
 	ldi ZL, low(display7s*2)
 	ldi ZH, high(display7s*2)
 	ldi XH, $01
@@ -119,7 +119,7 @@ main:
 	jmp f_32
 
 
-// CAMBIO DE PRESCALER para TCCR2B
+; CAMBIO DE PRESCALER para TCCR2B
 f_1024:
 	ldi temp, $07
 	sts TCCR2B, temp
@@ -141,7 +141,7 @@ f_32:
 	jmp main
 
 
-// INTERRUPCION EXTERNA
+; INTERRUPCION EXTERNA
 int_0: 
 	inc unidad
 	cpi unidad, $0A
@@ -173,7 +173,7 @@ error:
 	reti
 
 
-// MULTIPLEXEO DE LOS DISPLAYS CATODO COMUN
+; MULTIPLEXEO DE LOS DISPLAYS CATODO COMUN
 timer0_ovf:
 	ldi temp3, $00
 	out PORTC, temp3 ;Apaga displays
@@ -215,7 +215,7 @@ mux_centena:
 	reti
 
 
-// REALIZA EL TOGGLE PARA LAS FRECUENCIAS
+; REALIZA EL TOGGLE PARA LAS FRECUENCIAS
 timer2_ovf:
 	in temp2, PINB
 	com temp2
@@ -225,7 +225,7 @@ timer2_ovf:
 	reti
 
 
-// REGISTRO DE COMPARACION PARA VENTANA DE 1SEG
+; REGISTRO DE COMPARACION PARA VENTANA DE 1SEG
 timer1_COMPA:
 	mov uni_aux, unidad
 	mov dec_aux, decena
