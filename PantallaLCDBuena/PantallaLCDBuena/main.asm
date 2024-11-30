@@ -107,10 +107,10 @@ escriboCaracter: ;NOTA: temp3 tiene el valor de UDR0
 		mov temp4, temp3 ;saco copia
 
 		cpi contCaract, 16
-		breq cambiarDeLinea
+		breq despl_der
 
-		cpi contCaract, 8
-		brge despl_der
+		;cpi contCaract, 8
+		;brge despl_der
 
 
 		; parte alta
