@@ -1,0 +1,36 @@
+<ASSEMBLER_INFO>
+ <VERSION>2.2.8</VERSION>
+ <DEVICE>"ATmega328P"</DEVICE>
+ <WORKING_DIR>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\Debug</WORKING_DIR>
+ <INCLUDE_PATH>
+  <DIR>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc</DIR>
+  <DIR>C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avrassembler\Include</DIR>
+  <DIR></DIR>
+ </INCLUDE_PATH>
+ <SOURCE_FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</SOURCE_FILE>
+ <INCLUDED_FILES>
+  <FILE>C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc</FILE>
+ </INCLUDED_FILES>
+ <OBJECT_FILES>
+  <FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\Debug\PantallaLCDBuena.obj</FILE>
+ </OBJECT_FILES>
+ <HEX_FILES>
+  <FILE>PantallaLCDBuena.hex</FILE>
+ </HEX_FILES>
+ <OUTPUT_FILES>
+  <FILE>PantallaLCDBuena.map</FILE>
+  <FILE>PantallaLCDBuena.lss</FILE>
+ </OUTPUT_FILES>
+ <LABELS>
+  <reset><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>14</LINE></reset>
+  <recibiendoCaracteres><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>97</LINE></recibiendoCaracteres>
+  <delay_100m><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>214</LINE></delay_100m>
+  <delay_20m><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>196</LINE></delay_20m>
+  <main><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>93</LINE></main>
+  <escriboCaracter><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>104</LINE></escriboCaracter>
+  <cambiarDeLinea><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>142</LINE></cambiarDeLinea>
+  <despl_der><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>178</LINE></despl_der>
+  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>198</LINE></lazo2>
+  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>200</LINE></lazo1>
+ </LABELS>
+</ASSEMBLER_INFO>
