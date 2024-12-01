@@ -92,6 +92,9 @@ reset:
 
 main:
 	nop
+	inc contCaract ;Contar cuantos caracteres llevo
+	cpi contCaract, 16
+	breq despl_izq
 	jmp main
 
 recibiendoCaracteres:
@@ -102,15 +105,12 @@ recibiendoCaracteres:
 		reti
 
 escriboCaracter: ;NOTA: temp3 tiene el valor de UDR0
-		inc contCaract ;Contar cuantos caracteres llevo
 		lds temp3, UDR0 ; Guardo el caracter actual en temp
 		mov temp4, temp3 ;saco copia
 
-		cpi contCaract, 16
-		breq despl_der
 
 		;cpi contCaract, 8
-		;brge despl_der
+		;brge despl_izq
 
 
 		; parte alta
@@ -175,7 +175,7 @@ cambiarDeLinea:
 
 	ret
 
-despl_der:
+despl_izq:
 	; parte alta
 	ldi temp2, $14 ; Enable en 1 
 	out PORTD, temp
