@@ -125,10 +125,10 @@ resetLCD:;Funcion clear display
 	out PORTD, temp ; Enable en 0
 
 	; parte baja
-	ldi temp, $05 ; Enable en 1
+	ldi temp, $14 ; Enable en 1
 	out PORTD, temp
 
-	ldi temp, $01
+	ldi temp, $10
 	out PORTD, temp ; Enable en 0
 	call delay_20m
 
