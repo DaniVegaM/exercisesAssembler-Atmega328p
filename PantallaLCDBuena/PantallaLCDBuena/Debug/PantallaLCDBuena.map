@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm Sat Nov 30 20:05:16 2024
+AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm Sun Dec 01 17:47:23 2024
 
 
 EQU  SIGNATURE_000 0000001e
@@ -703,12 +703,12 @@ DEF  temp3        r20
 DEF  temp4        r21
 DEF  contCaract   r22
 CSEG reset        00000026
-CSEG recibiendoCaracteres 00000089
-CSEG delay_100m   000000b2
-CSEG delay_20m    000000a4
+CSEG recibiendoCaracteres 00000076
+CSEG delay_100m   0000009f
+CSEG delay_20m    00000091
 CSEG main         0000005a
 CSEG cambiarDeLinea 0000005d
-CSEG regreso      00000091
+CSEG regreso      0000007e
 CSEG resetLCD     00000069
-CSEG lazo2        000000a5
-CSEG lazo1        000000a6
+CSEG lazo2        00000092
+CSEG lazo1        00000093

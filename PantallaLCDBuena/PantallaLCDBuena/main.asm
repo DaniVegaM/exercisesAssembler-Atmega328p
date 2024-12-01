@@ -1,3 +1,4 @@
+
 	.def temp = r16
 	.def cont1 = r17
 	.def cont2 = r18
@@ -117,6 +118,7 @@ cambiarDeLinea:
 	jmp regreso
 
 resetLCD:;Funcion clear display
+	ldi contCaract, 0
 	; parte alta
 	ldi temp, $04 ; Enable en 1 
 	out PORTD, temp
@@ -144,7 +146,7 @@ recibiendoCaracteres:
 		cpi contCaract, 16
 		breq cambiarDeLinea
 
-		cpi contCaract, 20
+		cpi contCaract, 32
 		breq resetLCD
 regreso:
 

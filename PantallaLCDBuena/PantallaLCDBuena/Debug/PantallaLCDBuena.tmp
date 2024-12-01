@@ -22,15 +22,15 @@
   <FILE>PantallaLCDBuena.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <reset><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>14</LINE></reset>
-  <recibiendoCaracteres><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>169</LINE></recibiendoCaracteres>
-  <delay_100m><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>228</LINE></delay_100m>
-  <delay_20m><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>210</LINE></delay_20m>
-  <main><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>95</LINE></main>
-  <cambiarDeLinea><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>99</LINE></cambiarDeLinea>
-  <regreso><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>181</LINE></regreso>
-  <resetLCD><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>119</LINE></resetLCD>
-  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>212</LINE></lazo2>
-  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>214</LINE></lazo1>
+  <reset><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>15</LINE></reset>
+  <recibiendoCaracteres><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>139</LINE></recibiendoCaracteres>
+  <delay_100m><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>198</LINE></delay_100m>
+  <delay_20m><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>180</LINE></delay_20m>
+  <main><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>96</LINE></main>
+  <cambiarDeLinea><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>100</LINE></cambiarDeLinea>
+  <regreso><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>151</LINE></regreso>
+  <resetLCD><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>120</LINE></resetLCD>
+  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>182</LINE></lazo2>
+  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\PantallaLCDBuena\PantallaLCDBuena\main.asm</FILE><LINE>184</LINE></lazo1>
  </LABELS>
 </ASSEMBLER_INFO>
