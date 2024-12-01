@@ -86,32 +86,67 @@ reset:
 	ldi temp, $10
 	out PORTD, temp ; Enable en 0
 
+	ldi contCaract, 0
+
 	call delay_20m
 
 	sei
 
 main:
 	nop
-	inc contCaract ;Contar cuantos caracteres llevo
-	cpi contCaract, 16
-	breq despl_izq
 	jmp main
+
+cambiarDeLinea:
+	;*********************** Brinco a direccion $40 del display para seleccionar Linea 2
+	; parte alta
+	ldi temp, $C4 ; Enable en 1 
+	out PORTD, temp
+
+	ldi temp, $C0
+	out PORTD, temp ; Enable en 0
+
+	; parte baja
+	ldi temp, $04 ; Enable en 1
+	out PORTD, temp
+
+	ldi temp, $00
+	out PORTD, temp ; Enable en 0
+	call delay_20m
+
+
+	jmp regreso
+
+resetLCD:;Funcion clear display
+	; parte alta
+	ldi temp, $04 ; Enable en 1 
+	out PORTD, temp
+
+	ldi temp, $00
+	out PORTD, temp ; Enable en 0
+
+	; parte baja
+	ldi temp, $05 ; Enable en 1
+	out PORTD, temp
+
+	ldi temp, $01
+	out PORTD, temp ; Enable en 0
+	call delay_20m
+
+	jmp regreso
 
 recibiendoCaracteres:
 		; ***************************** LETRA A
-		lds temp4, UDR0
-		cp temp3, temp4 ;Si es el mismo caracter anterior no escribo nada
-		brne escriboCaracter
-		reti
 
-escriboCaracter: ;NOTA: temp3 tiene el valor de UDR0
+		inc contCaract ;Contar cuantos caracteres llevo
 		lds temp3, UDR0 ; Guardo el caracter actual en temp
 		mov temp4, temp3 ;saco copia
 
+		cpi contCaract, 16
+		breq cambiarDeLinea
 
-		;cpi contCaract, 8
-		;brge despl_izq
-
+		cpi contCaract, 20
+		breq resetLCD
+regreso:
 
 		; parte alta
 		andi temp3, $F0 ;Obtengo parte alta
@@ -138,59 +173,6 @@ escriboCaracter: ;NOTA: temp3 tiene el valor de UDR0
 		call delay_20m
 		
 		reti
-
-cambiarDeLinea:
-	;*********************** Brinco a direccion $40 del display para seleccionar Linea 2
-	ldi contCaract, 16
-	; parte alta
-	ldi temp, $C4 ; Enable en 1 
-	out PORTD, temp
-
-	ldi temp, $C0
-	out PORTD, temp ; Enable en 0
-
-	; parte baja
-	ldi temp, $04 ; Enable en 1
-	out PORTD, temp
-
-	ldi temp, $00
-	out PORTD, temp ; Enable en 0
-	call delay_20m
-
-	; ***************************** ESPACIO
-	; parte alta
-	ldi temp, $2C ; Enable en 1 
-	out PORTD, temp
-
-	ldi temp, $28
-	out PORTD, temp ; Enable en 0
-
-	; parte baja
-	ldi temp, $0C ; Enable en 1
-	out PORTD, temp
-
-	ldi temp, $08
-	out PORTD, temp ; Enable en 0
-	call delay_20m
-
-	ret
-
-despl_izq:
-	; parte alta
-	ldi temp2, $14 ; Enable en 1 
-	out PORTD, temp
-
-	ldi temp2, $10
-	out PORTD, temp ; Enable en 0
-
-	; parte baja
-	ldi temp2, $84 ; Enable en 1
-	out PORTD, temp
-
-	ldi temp2, $80
-	out PORTD, temp ; Enable en 0
-
-	ret
 
 
 delay_20m:
