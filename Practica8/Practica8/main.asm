@@ -94,47 +94,44 @@ reset:
 	ldi temp, 103
 	sts UBRR0L, temp ; USART con Baud rate de 9600 bps
 
+
 	sei
 
-main:
+main:	
 	jmp main
 
 recibe: 
 	lds temp, UDR0 ; leemos dato y se limpia bandera de recepcion
-	;sts UDR0, temp ; sacamos caracter a D1(tx)
-
+	sts UDR0, temp ; sacamos caracter a D1(tx)
+	
 	; ***************************** CARACTER LEIDO
 	; parte alta
 	ldi h, $F0
 	and h, temp
-	subi h, -$0C ;concatena C a la derecha de h
-	;ldi temp, $4C ; Enable en 1 
-	out PORTD, h
+	out PORTD, h ; Enable en 1
+	sbi PORTD, 4 ; Concatenamos $0C 
+	sbi PORTD, 3
 
 	ldi h, $F0
 	and h, temp
-	subi h, -$08 ;concatena 8 a la derecha de h
-	;ldi temp, $48
 	out PORTD, h ; Enable en 0
+	sbi PORTD, 4 ; Concatenamos $08 
 
 	; parte baja
 	ldi l, $0F
 	and l, temp
 	swap l
-	subi l, -$0C ;concatena C a la derecha de h
-	;ldi temp, $DC ; Enable en 1
-	out PORTD, l
+	out PORTD, l ; Enable en 1
+	sbi PORTD, 4 ; Concatenamos $0C
+	sbi PORTD, 3
 
 	ldi l, $0F
 	and l, temp
 	swap l
-	subi l, -$08 ;concatena 8 a la derecha de h
-	;ldi temp, $D8
-	out PORTD, temp ; Enable en 0
+	out PORTD, l ; Enable en 0
+	sbi PORTD, 4 ; Concatenamos $08 
+
 	call delay_20m
-
-	sts UDR0, temp
-
 	reti
 
 delay_20m:
