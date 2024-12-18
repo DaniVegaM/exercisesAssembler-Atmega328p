@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm Tue Dec 17 18:42:45 2024
+AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm Tue Dec 17 19:20:25 2024
 
 
 EQU  SIGNATURE_000 0000001e
@@ -710,6 +710,7 @@ CSEG recibiendoCaracteres 000000f2
 CSEG delay_100m   0000011f
 CSEG delay_20m    00000111
 CSEG main         0000005c
+CSEG puertoCEPuertoBS 00000063
 CSEG tecla_00     00000071
 CSEG tecla_04     00000074
 CSEG tecla_08     00000077
@@ -728,7 +729,7 @@ CSEG sumar_61     000000b3
 CSEG sumar_70     000000b6
 CSEG transmitir_dato 000000c1
 CSEG reset_contador 000000be
-CSEG regresoATeclado 000000c4
+CSEG regresoATeclado 000000c7
 CSEG cambiarDeLinea 000000d3
 CSEG regreso      000000fc
 CSEG resetLCD     000000df

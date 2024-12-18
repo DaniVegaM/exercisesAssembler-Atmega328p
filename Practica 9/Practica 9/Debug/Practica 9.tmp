@@ -23,36 +23,37 @@
  </OUTPUT_FILES>
  <LABELS>
   <reset><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>19</LINE></reset>
-  <recibiendoCaracteres><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>311</LINE></recibiendoCaracteres>
-  <delay_100m><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>377</LINE></delay_100m>
-  <delay_20m><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>359</LINE></delay_20m>
+  <recibiendoCaracteres><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>313</LINE></recibiendoCaracteres>
+  <delay_100m><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>380</LINE></delay_100m>
+  <delay_20m><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>362</LINE></delay_20m>
   <main><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>103</LINE></main>
-  <tecla_00><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>134</LINE></tecla_00>
-  <tecla_04><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>138</LINE></tecla_04>
-  <tecla_08><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>142</LINE></tecla_08>
-  <tecla_0C><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>146</LINE></tecla_0C>
-  <leer_columnas><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>151</LINE></leer_columnas>
-  <tecla_mas_0><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>185</LINE></tecla_mas_0>
-  <tecla_mas_1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>188</LINE></tecla_mas_1>
-  <tecla_mas_2><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>192</LINE></tecla_mas_2>
-  <tecla_mas_3><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>196</LINE></tecla_mas_3>
-  <sumar_offset><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>201</LINE></sumar_offset>
-  <inc_offset><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>241</LINE></inc_offset>
-  <sumar_30><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>220</LINE></sumar_30>
-  <sumar_41><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>224</LINE></sumar_41>
-  <sumar_50><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>228</LINE></sumar_50>
-  <sumar_61><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>232</LINE></sumar_61>
-  <sumar_70><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>236</LINE></sumar_70>
-  <transmitir_dato><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>252</LINE></transmitir_dato>
-  <reset_contador><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>248</LINE></reset_contador>
-  <regresoATeclado><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>255</LINE></regresoATeclado>
-  <cambiarDeLinea><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>265</LINE></cambiarDeLinea>
-  <regreso><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>328</LINE></regreso>
-  <resetLCD><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>285</LINE></resetLCD>
-  <cargarTecla><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>304</LINE></cargarTecla>
-  <continuarRecibiendoCaracteres><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>319</LINE></continuarRecibiendoCaracteres>
-  <regresamosAParteDelTeclado><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>307</LINE></regresamosAParteDelTeclado>
-  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>361</LINE></lazo2>
-  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>363</LINE></lazo1>
+  <puertoCEPuertoBS><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>115</LINE></puertoCEPuertoBS>
+  <tecla_00><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>135</LINE></tecla_00>
+  <tecla_04><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>139</LINE></tecla_04>
+  <tecla_08><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>143</LINE></tecla_08>
+  <tecla_0C><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>147</LINE></tecla_0C>
+  <leer_columnas><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>152</LINE></leer_columnas>
+  <tecla_mas_0><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>187</LINE></tecla_mas_0>
+  <tecla_mas_1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>190</LINE></tecla_mas_1>
+  <tecla_mas_2><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>194</LINE></tecla_mas_2>
+  <tecla_mas_3><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>198</LINE></tecla_mas_3>
+  <sumar_offset><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>203</LINE></sumar_offset>
+  <inc_offset><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>243</LINE></inc_offset>
+  <sumar_30><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>222</LINE></sumar_30>
+  <sumar_41><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>226</LINE></sumar_41>
+  <sumar_50><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>230</LINE></sumar_50>
+  <sumar_61><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>234</LINE></sumar_61>
+  <sumar_70><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>238</LINE></sumar_70>
+  <transmitir_dato><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>254</LINE></transmitir_dato>
+  <reset_contador><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>250</LINE></reset_contador>
+  <regresoATeclado><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>259</LINE></regresoATeclado>
+  <cambiarDeLinea><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>267</LINE></cambiarDeLinea>
+  <regreso><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>331</LINE></regreso>
+  <resetLCD><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>287</LINE></resetLCD>
+  <cargarTecla><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>306</LINE></cargarTecla>
+  <continuarRecibiendoCaracteres><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>322</LINE></continuarRecibiendoCaracteres>
+  <regresamosAParteDelTeclado><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>309</LINE></regresamosAParteDelTeclado>
+  <lazo2><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>364</LINE></lazo2>
+  <lazo1><FILE>C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm</FILE><LINE>366</LINE></lazo1>
  </LABELS>
 </ASSEMBLER_INFO>

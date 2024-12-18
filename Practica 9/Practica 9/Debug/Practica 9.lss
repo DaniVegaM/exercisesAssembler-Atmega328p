@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm Tue Dec 17 18:42:45 2024
+AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm Tue Dec 17 19:20:25 2024
 
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
 [builtin](2): Including file 'C:/Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\avrasm\inc\m328Pdef.inc'
@@ -1079,12 +1079,12 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
                                  
 000056 e060                      	ldi contCaract, 0
                                  
-000057 940e 0111                 	call delay_20m
+000057 e070                      	ldi offset, 0
+000058 e090                      	ldi vieneDeTeclado, 0 ;Originalmente no sabemos
                                  
-000059 9478                      	sei
+000059 940e 0111                 	call delay_20m
                                  
-00005a e070                          ldi offset, 0
-00005b e090                      	ldi vieneDeTeclado, 0 ;Originalmente no sabemos
+00005b 9478                      	sei
                                      
                                  main:
 00005c e000                          ldi temp, $00 ; Portc como entrada
@@ -1098,6 +1098,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
 000061 e000                          ldi temp, $00 ; Portb en ceros
 000062 b905                          out PORTB, temp
                                  
+                                 puertoCEPuertoBS:
 000063 0000                          nop
 000064 0000                      	nop
                                  
@@ -1115,7 +1116,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
 00006d 3007                          cpi temp, $07
 00006e f059                          breq tecla_0C
                                  
-00006f 940c 005c                     jmp main
+00006f 940c 0063                     jmp puertoCEPuertoBS
                                  
                                  tecla_00:
 000071 e080                          ldi tecla, $00
@@ -1138,7 +1139,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
 00007d e00f                          ldi temp, $0F ;Portc como salida
 00007e b907                          out DDRC, temp
                                      
-00007f e000                          ldi temp, $00 ; Portb en ceros
+00007f e000                          ldi temp, $00 ; Portc en ceros
 000080 b908                          out PORTC, temp
                                  
 000081 e000                          ldi temp, $00
@@ -1153,6 +1154,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
                                  
 000087 b103                          in temp, PINB
 000088 700f                          andi temp, $0F
+                                 
 000089 300e                          cpi temp, $0E
 00008a f041                          breq tecla_mas_0
                                  
@@ -1185,7 +1187,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
                                  
                                  
                                  sumar_offset:
-00009e 308f                          cpi tecla, $0F
+00009e 308f                          cpi tecla, $0F ;Por si cambiamos el modo creo
 00009f f0c9                          breq inc_offset
                                  
 0000a0 3070                          cpi offset, 0
@@ -1229,7 +1231,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
 0000ba f019                          breq reset_contador
                                  
 0000bb 9573                          inc offset
-0000bc 940c 00c1                     jmp transmitir_dato
+0000bc 940c 005c                     jmp main
                                  
                                  reset_contador:
 0000be e070                          ldi offset, 0
@@ -1237,10 +1239,10 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
                                  
                                  transmitir_dato: ;Aqui solo se transmmite dato desde el teclado creo, porque desde la PC es con interrupcion
 0000c1 e091                      	ldi vieneDeTeclado, 1
-0000c2 940c 00f2                 	jmp recibiendoCaracteres ;Vamos a mandar el dato, reutilizamos
+0000c2 2f08                      	mov temp, tecla
+0000c3 9300 00c6                 	sts UDR0, temp ;Mandamos valor a la PC
+0000c5 940c 00f2                 	jmp recibiendoCaracteres ;Vamos a mandar el dato, reutilizamos
                                  regresoATeclado:
-0000c4 2f08                      	mov temp, tecla
-0000c5 9300 00c6                 	sts UDR0, temp ;Mandamos valor a la PC
 0000c7 940e 011f                     call delay_100m
 0000c9 940e 011f                     call delay_100m
 0000cb 940e 011f                     call delay_100m
@@ -1292,13 +1294,14 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
 0000ed 940c 00f7                 	jmp continuarRecibiendoCaracteres
                                  regresamosAParteDelTeclado:
 0000ef e090                      	ldi vieneDeTeclado, 0 ;Reiniciamos bandera
-0000f0 940c 00c4                 	jmp regresoATeclado
+0000f0 940c 00c7                 	jmp regresoATeclado
                                  
                                  recibiendoCaracteres:
                                      ; ***************************** LETRA A
 0000f2 9563                          inc contCaract ;Contar cuantos caracteres llevo
                                  
-0000f3 9140 00c6                     lds temp3, UDR0 ; Guardo el caracter (que viene de computadora) actual en temp
+0000f3 9140 00c6                 	lds temp3, UDR0 ; Guardo el caracter (que viene de computadora) actual en temp
+                                 
 0000f5 3091                      	cpi vieneDeTeclado, 1
 0000f6 f3a9                      	breq cargarTecla
                                  
@@ -1339,7 +1342,7 @@ AVRASM ver. 2.2.8  C:\Users\Daniel Vegaam\Desktop\Practica 9\Practica 9\main.asm
                                      
 00010e 3091                      	cpi vieneDeTeclado, 1
 00010f f2f9                      	breq regresamosAParteDelTeclado ;Para que si viene del teclado evitamos hacer el reti
-000110 9518                          reti
+000110 9518                          reti ;Sino regresamos la interrupcion
                                  
                                  
                                  delay_20m:

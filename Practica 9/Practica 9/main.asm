@@ -93,12 +93,12 @@ reset:
 
 	ldi contCaract, 0
 
+	ldi offset, 0
+	ldi vieneDeTeclado, 0 ;Originalmente no sabemos
+
 	call delay_20m
 
 	sei
-
-    ldi offset, 0
-	ldi vieneDeTeclado, 0 ;Originalmente no sabemos
     
 main:
     ldi temp, $00 ; Portc como entrada
@@ -112,6 +112,7 @@ main:
     ldi temp, $00 ; Portb en ceros
     out PORTB, temp
 
+puertoCEPuertoBS:
     nop
 	nop
 
@@ -129,7 +130,7 @@ main:
     cpi temp, $07
     breq tecla_0C
 
-    jmp main
+    jmp puertoCEPuertoBS
 
 tecla_00:
     ldi tecla, $00
@@ -152,7 +153,7 @@ leer_columnas:
     ldi temp, $0F ;Portc como salida
     out DDRC, temp
     
-    ldi temp, $00 ; Portb en ceros
+    ldi temp, $00 ; Portc en ceros
     out PORTC, temp
 
     ldi temp, $00
@@ -167,6 +168,7 @@ leer_columnas:
 
     in temp, PINB
     andi temp, $0F
+
     cpi temp, $0E
     breq tecla_mas_0
 
@@ -199,7 +201,7 @@ tecla_mas_3:
 
 
 sumar_offset:
-    cpi tecla, $0F
+    cpi tecla, $0F ;Por si cambiamos el modo creo
     breq inc_offset
 
     cpi offset, 0
@@ -243,7 +245,7 @@ inc_offset:
     breq reset_contador
 
     inc offset
-    jmp transmitir_dato
+    jmp main
 
 reset_contador:
     ldi offset, 0
@@ -251,10 +253,10 @@ reset_contador:
 
 transmitir_dato: ;Aqui solo se transmmite dato desde el teclado creo, porque desde la PC es con interrupcion
 	ldi vieneDeTeclado, 1
-	jmp recibiendoCaracteres ;Vamos a mandar el dato, reutilizamos
-regresoATeclado:
 	mov temp, tecla
 	sts UDR0, temp ;Mandamos valor a la PC
+	jmp recibiendoCaracteres ;Vamos a mandar el dato, reutilizamos
+regresoATeclado:
     call delay_100m
     call delay_100m
     call delay_100m
@@ -312,7 +314,8 @@ recibiendoCaracteres:
     ; ***************************** LETRA A
     inc contCaract ;Contar cuantos caracteres llevo
 
-    lds temp3, UDR0 ; Guardo el caracter (que viene de computadora) actual en temp
+	lds temp3, UDR0 ; Guardo el caracter (que viene de computadora) actual en temp
+
 	cpi vieneDeTeclado, 1
 	breq cargarTecla
 
@@ -353,7 +356,7 @@ regreso:
     
 	cpi vieneDeTeclado, 1
 	breq regresamosAParteDelTeclado ;Para que si viene del teclado evitamos hacer el reti
-    reti
+    reti ;Sino regresamos la interrupcion
 
 
 delay_20m:
