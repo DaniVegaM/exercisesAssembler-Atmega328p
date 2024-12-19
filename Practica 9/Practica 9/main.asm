@@ -15,10 +15,12 @@
 jmp reset
 .org $024
 jmp recibiendoCaracteres
+.org $028
+jmp transmitiendoCaracteres
 
 reset: 
 	;=============CONFIGURAMOS USART============================
-	ldi temp, $98
+	ldi temp, $D8
 	sts UCSR0B, temp; configuramos USART RX y TX
 
 	ldi temp, 103
@@ -90,13 +92,13 @@ reset:
 
 	ldi temp, $10
 	out PORTD, temp ; Enable en 0
+	call delay_20m
 
 	ldi contCaract, 0
 
 	ldi offset, 0
 	ldi vieneDeTeclado, 0 ;Originalmente no sabemos
 
-	call delay_20m
 
 	sei
     
@@ -188,15 +190,15 @@ tecla_mas_0:
     jmp sumar_offset
     
 tecla_mas_1:
-    subi tecla, -1
+    subi tecla, -$01
     jmp sumar_offset
     
 tecla_mas_2:
-    subi tecla, -2
+    subi tecla, -$02
     jmp sumar_offset
 
 tecla_mas_3:
-    subi tecla, -3
+    subi tecla, -$03
     jmp sumar_offset
 
 
@@ -311,10 +313,9 @@ regresamosAParteDelTeclado:
 	jmp regresoATeclado
 
 recibiendoCaracteres:
-    ; ***************************** LETRA A
     inc contCaract ;Contar cuantos caracteres llevo
 
-	lds temp3, UDR0 ; Guardo el caracter (que viene de computadora) actual en temp
+	lds temp3, UDR0 ; Guardo el caracter (que viene de computadora) actual en temp y se limpia bandera
 
 	cpi vieneDeTeclado, 1
 	breq cargarTecla
