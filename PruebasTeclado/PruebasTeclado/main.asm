@@ -82,9 +82,9 @@ reset:
 	out PORTD, temp ; Enable en 0
 	call delay_20m
 
-
-    ; Registros para funcionamiento del teclado 
-	ldi offset, $00
+	
+	ldi contCaract, 0 ; Contador de carateres
+	ldi offset, $00 ; Offset para cambio de modo
 
 main:
     ldi temp, $00 ; Portc como entrada
@@ -203,23 +203,23 @@ sumar_offset:
 
 sumar_30:
     subi tecla, -$30
-    jmp transmitir_dato
+    jmp controlLineas
 
 sumar_41:
     subi tecla, -$41
-    jmp transmitir_dato
+    jmp controlLineas
 
 sumar_50:
     subi tecla, -$50
-    jmp transmitir_dato
+    jmp controlLineas
 
 sumar_61:
     subi tecla, -$61
-    jmp transmitir_dato
+    jmp controlLineas
 
 sumar_70:
     subi tecla, -$70
-    jmp transmitir_dato
+    jmp controlLineas
 
 
 inc_offset:
@@ -235,30 +235,58 @@ inc_offset:
 
 reset_contador:
     ldi offset, 0
-    jmp transmitir_dato
-
-intermitente:
-	sbi PORTD, 2
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	cbi PORTD, 2
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	call delay_100m
-	ret
+    jmp controlLineas
 
 transmitir_dato: ;Aqui solo se transmmite dato desde el teclado creo, porque desde la PC es con interrupcion
+	
+cambiarDeLinea:
+	;*********************** Brinco a direccion $40 del display para seleccionar Linea 2
+	; parte alta
+	ldi temp, $C4 ; Enable en 1 
+	out PORTD, temp
+
+	ldi temp, $C0
+	out PORTD, temp ; Enable en 0
+
+	; parte baja
+	ldi temp, $04 ; Enable en 1
+	out PORTD, temp
+
+	ldi temp, $00
+	out PORTD, temp ; Enable en 0
+	call delay_20m
+
+	jmp printCaracter
+
+controlLineas:
+	; Salto de linea
+	cpi contCaract, 16
+    breq cambiarDeLinea
+
+	; Limpiar pantalla
+    cpi contCaract, 32
+    breq resetLCD
+
+	jmp printCaracter
+
+resetLCD:;Funcion clear display
+	ldi contCaract, 0
+	; parte alta
+	ldi temp, $04 ; Enable en 1 
+	out PORTD, temp
+
+	ldi temp, $00
+	out PORTD, temp ; Enable en 0
+
+	; parte baja
+	ldi temp, $14 ; Enable en 1
+	out PORTD, temp
+
+	ldi temp, $10
+	out PORTD, temp ; Enable en 0
+	call delay_20m
+
+printCaracter:	
 	mov temp3, tecla
     mov temp4, tecla
 
@@ -288,6 +316,7 @@ transmitir_dato: ;Aqui solo se transmmite dato desde el teclado creo, porque des
     call delay_100m
     call delay_100m
     call delay_100m
+	inc contCaract
     jmp main
 
 delay_20m:
