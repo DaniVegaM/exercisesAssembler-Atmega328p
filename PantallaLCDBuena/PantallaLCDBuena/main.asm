@@ -161,10 +161,7 @@ regreso:
 
 		; parte baja
 		andi temp4, $0F ;Obtengo parte baja
-		lsl temp4
-		lsl temp4
-		lsl temp4
-		lsl temp4
+		swap temp4
 		ori temp4, $0C ;C (00001100)
 		out PORTD, temp4
 
