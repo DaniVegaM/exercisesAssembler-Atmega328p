@@ -27,7 +27,7 @@ reset:
 	sts UBRR0L, temp ; USART con Baud rate de 9600 bps
 
 	; ============CONFIGURAMOS DISPLAY PRIMEROO =============
-	ldi temp, $FE
+	ldi temp, $FC
 	out DDRD, temp
 	call delay_100m
 	; *********************** FUNCION SET
@@ -94,14 +94,10 @@ reset:
 	out PORTD, temp ; Enable en 0
 	call delay_20m
 
-	ldi contCaract, 0
+	
+	ldi contCaract, 0 ; Contador de carateres
+	ldi offset, $00 ; Offset para cambio de modo
 
-	ldi offset, 0
-	ldi vieneDeTeclado, 0 ;Originalmente no sabemos
-
-
-	sei
-    
 main:
     ldi temp, $00 ; Portc como entrada
     out DDRC, temp
@@ -152,18 +148,15 @@ tecla_0C:
 
 
 leer_columnas:
-    ldi temp, $0F ;Portc como salida
-    out DDRC, temp
-    
     ldi temp, $00 ; Portc en ceros
     out PORTC, temp
-
-    ldi temp, $00
-    out DDRB, temp ; Portb como entrada
-
+	ldi temp, $0F ;Portc como salida
+    out DDRC, temp
+	
     ldi temp, $0F
     out PORTB, temp ; Resistencias de pull-up
-
+	ldi temp, $00
+    out DDRB, temp ; Portb como entrada
 
     nop
 	nop
@@ -201,9 +194,8 @@ tecla_mas_3:
     subi tecla, -$03
     jmp sumar_offset
 
-
 sumar_offset:
-    cpi tecla, $0F ;Por si cambiamos el modo creo
+    cpi tecla, $0F ;Indica que hay que cambiar de modo
     breq inc_offset
 
     cpi offset, 0
@@ -223,49 +215,43 @@ sumar_offset:
 
 sumar_30:
     subi tecla, -$30
-    jmp transmitir_dato
+    jmp controlLineas
 
 sumar_41:
     subi tecla, -$41
-    jmp transmitir_dato
+    jmp controlLineas
 
 sumar_50:
     subi tecla, -$50
-    jmp transmitir_dato
+    jmp controlLineas
 
 sumar_61:
     subi tecla, -$61
-    jmp transmitir_dato
+    jmp controlLineas
 
 sumar_70:
     subi tecla, -$70
-    jmp transmitir_dato
+    jmp controlLineas
 
 
 inc_offset:
     cpi offset, 4
     breq reset_contador
-
     inc offset
+
+	call delay_100m
+	call delay_100m
+	call delay_100m
+
     jmp main
 
 reset_contador:
     ldi offset, 0
-    jmp transmitir_dato
+    jmp controlLineas
 
-transmitir_dato: ;Aqui solo se transmmite dato desde el teclado creo, porque desde la PC es con interrupcion
-	ldi vieneDeTeclado, 1
-	mov temp, tecla
-	sts UDR0, temp ;Mandamos valor a la PC
-	jmp recibiendoCaracteres ;Vamos a mandar el dato, reutilizamos
-regresoATeclado:
-    call delay_100m
-    call delay_100m
-    call delay_100m
-    call delay_100m
-    call delay_100m
-    jmp main
-
+recibiendoCaracteres: ; Interrupcion para recibir desde la compu
+transmitiendoCaracteres: ; Interrupcion para transmitir hacia la compu
+	
 cambiarDeLinea:
 	;*********************** Brinco a direccion $40 del display para seleccionar Linea 2
 	; parte alta
@@ -283,8 +269,18 @@ cambiarDeLinea:
 	out PORTD, temp ; Enable en 0
 	call delay_20m
 
+	jmp printCaracter
 
-	jmp regreso
+controlLineas:
+	; Salto de linea
+	cpi contCaract, 16
+    breq cambiarDeLinea
+
+	; Limpiar pantalla
+    cpi contCaract, 32
+    breq resetLCD
+
+	jmp printCaracter
 
 resetLCD:;Funcion clear display
 	ldi contCaract, 0
@@ -303,33 +299,9 @@ resetLCD:;Funcion clear display
 	out PORTD, temp ; Enable en 0
 	call delay_20m
 
-	jmp regreso
-
-cargarTecla:
+printCaracter:	
 	mov temp3, tecla
-	jmp continuarRecibiendoCaracteres
-regresamosAParteDelTeclado:
-	ldi vieneDeTeclado, 0 ;Reiniciamos bandera
-	jmp regresoATeclado
-
-recibiendoCaracteres:
-    inc contCaract ;Contar cuantos caracteres llevo
-
-	lds temp3, UDR0 ; Guardo el caracter (que viene de computadora) actual en temp y se limpia bandera
-
-	cpi vieneDeTeclado, 1
-	breq cargarTecla
-
-continuarRecibiendoCaracteres:
-    mov temp4, temp3 ;saco copia (del caracter)
-
-    cpi contCaract, 16
-    breq cambiarDeLinea
-
-    cpi contCaract, 32
-    breq resetLCD
-
-regreso:
+    mov temp4, tecla
 
     ; parte alta
     andi temp3, $F0 ;Obtengo parte alta
@@ -342,10 +314,7 @@ regreso:
 
     ; parte baja
     andi temp4, $0F ;Obtengo parte baja
-    lsl temp4
-    lsl temp4
-    lsl temp4
-    lsl temp4
+	swap temp4
     ori temp4, $0C ;C (00001100)
     out PORTD, temp4
 
@@ -355,10 +324,13 @@ regreso:
 
     call delay_20m
     
-	cpi vieneDeTeclado, 1
-	breq regresamosAParteDelTeclado ;Para que si viene del teclado evitamos hacer el reti
-    reti ;Sino regresamos la interrupcion
-
+    call delay_100m
+    call delay_100m
+    call delay_100m
+    call delay_100m
+    call delay_100m
+	inc contCaract
+    jmp main
 
 delay_20m:
 	ldi cont1, 160
