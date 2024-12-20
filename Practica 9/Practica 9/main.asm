@@ -15,12 +15,12 @@
 jmp reset
 .org $024
 jmp recibiendoCaracteres
-.org $028
-jmp transmitiendoCaracteres
+;.org $028
+;jmp transmitiendoCaracteres
 
 reset: 
 	;=============CONFIGURAMOS USART============================
-	ldi temp, $D8
+	ldi temp, $98
 	sts UCSR0B, temp; configuramos USART RX y TX
 
 	ldi temp, 103
@@ -93,10 +93,11 @@ reset:
 	ldi temp, $10
 	out PORTD, temp ; Enable en 0
 	call delay_20m
-
 	
 	ldi contCaract, 0 ; Contador de carateres
 	ldi offset, $00 ; Offset para cambio de modo
+
+	sei
 
 main:
     ldi temp, $00 ; Portc como entrada
@@ -250,6 +251,87 @@ reset_contador:
     jmp controlLineas
 
 recibiendoCaracteres: ; Interrupcion para recibir desde la compu
+	lds tecla, UDR0
+
+	; Salto de linea
+	cpi contCaract, 16
+    breq cambiarDeLineaRx
+
+	; Limpiar pantalla
+    cpi contCaract, 32
+    breq resetLCDRx
+
+printCaracterRx:	
+	mov temp3, tecla
+    mov temp4, tecla
+
+    ; parte alta
+    andi temp3, $F0 ;Obtengo parte alta
+    ori temp3, $0C ;C (00001100)
+    out PORTD, temp3
+
+    andi temp3, $F0
+    ori temp3, $08 ;8 (00001000)
+    out PORTD, temp3 ; Enable en 0
+
+    ; parte baja
+    andi temp4, $0F ;Obtengo parte baja
+	swap temp4
+    ori temp4, $0C ;C (00001100)
+    out PORTD, temp4
+
+    andi temp4, $F0
+    ori temp4, $08 ;8 (00001000)
+    out PORTD, temp4 ; Enable en 0
+
+    call delay_20m
+
+	inc contCaract
+
+	reti
+
+
+cambiarDeLineaRx:
+	;*********************** Brinco a direccion $40 del display para seleccionar Linea 2
+	; parte alta
+	ldi temp, $C4 ; Enable en 1 
+	out PORTD, temp
+
+	ldi temp, $C0
+	out PORTD, temp ; Enable en 0
+
+	; parte baja
+	ldi temp, $04 ; Enable en 1
+	out PORTD, temp
+
+	ldi temp, $00
+	out PORTD, temp ; Enable en 0
+	call delay_20m
+
+	jmp printCaracterRx
+
+
+resetLCDRx:;Funcion clear display
+	ldi contCaract, 0
+
+	; parte alta
+	ldi temp, $04 ; Enable en 1 
+	out PORTD, temp
+
+	ldi temp, $00
+	out PORTD, temp ; Enable en 0
+
+	; parte baja
+	ldi temp, $14 ; Enable en 1
+	out PORTD, temp
+
+	ldi temp, $10
+	out PORTD, temp ; Enable en 0
+	call delay_20m
+
+	jmp printCaracterRx
+
+
 transmitiendoCaracteres: ; Interrupcion para transmitir hacia la compu
 	
 cambiarDeLinea:
