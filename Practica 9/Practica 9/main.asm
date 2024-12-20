@@ -385,6 +385,8 @@ printCaracter:
 	mov temp3, tecla
     mov temp4, tecla
 
+	sts UDR0, tecla ; Imprime en la terminal del PC
+
     ; parte alta
     andi temp3, $F0 ;Obtengo parte alta
     ori temp3, $0C ;C (00001100)
